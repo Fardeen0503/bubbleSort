@@ -1,0 +1,71 @@
+import java.util.*;
+
+class Main{
+  void merge(int arr[],int b, int m, int e){
+    int i,j,k;
+    int n1=m-b+1;
+    int n2=e-m;
+
+    int la[] = new int[n1];
+    int ra[] = new int[n2];
+
+    for( i=0;i<n1;i++)
+      la[i] =arr[b+i];
+      for(j=0;j<n2;j++)
+        ra[j]=arr[m+1+j];
+    i=0;
+    j=0;
+    k=b;
+    while(i<n1 && j<n2){
+      if(la[i] <=ra[j]){
+        arr[k] =la[i];
+        i++;
+      }
+      else{
+        arr[k]=ra[j];
+        j++;
+      }
+      k++;
+    }
+    while(i<n1){
+      arr[k] = la[i];
+      i++;
+      k++;
+    }
+        while(j<n2){
+          arr[k] =ra[j];
+          j++;
+          k++;
+        }
+  }
+
+  void mergeSort(int arr[],int b,int e){
+    if(b<e){
+      int m=(b+e)/2;
+      mergeSort(arr,b,m);
+      mergeSort(arr,m+1,e);
+      merge(arr,b,m,e);
+    }
+  }
+
+  void printArray(int arr[],int n){
+    for(int i=0;i<n;i++){
+      System.out.print(" "+arr[i]);
+    }
+  }
+
+  public static void main (String[] args){
+    Scanner sc = new Scanner(System.in);
+    int n= sc.nextInt();
+    int [] arr = new int[n];
+    for(int i=0;i<n;i++){
+      arr[i]=sc.nextInt();
+    }
+    sc.close();
+
+    Main mm = new Main();
+    mm.mergeSort(arr,0,n-1);
+    mm.printArray(arr,n);
+    
+  }
+}
