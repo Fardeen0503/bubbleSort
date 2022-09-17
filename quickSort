@@ -1,0 +1,48 @@
+import java.util.*;
+class Main{
+
+  int partition(int arr[], int l,int h){
+    int pivot = arr[h];
+    int i = l-1;
+    for(int j=l;j<=h-1;j++){
+      if(arr[j] < pivot){
+        i++;
+        int t= arr[i];
+        arr[i]= arr[j];
+        arr[j] =t;
+      }
+    }
+    int t=arr[i+1];
+    arr[i+1] = arr[h];
+    arr[h] = t;
+    return (i+1);
+  }
+  void quickSort(int arr[],int l,int h){
+    if(l<h){
+      int p = partition(arr,l,h);
+      quickSort(arr,l,p-1);
+      quickSort(arr,p+1,h);
+    }
+  }
+
+  void printArray(int arr[],int n){
+    int i;
+    for(i=0;i<n;i++){
+      System.out.print(" " +arr[i]);
+    }
+  }
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    int n= sc.nextInt();
+    int [] arr = new int[n];
+    for(int i=0;i<n;i++){
+      arr[i]= sc.nextInt();
+    }
+    sc.close();
+
+    Main m = new Main();
+    m.quickSort(arr, 0, n-1);
+    m.printArray(arr,n);
+    
+  }
+}
